@@ -23,6 +23,7 @@ class XeetDaoCassandra : XeetDao {
     override fun get(xid: UUID): Mono<Xeet?> = repository.findById(xid)
 
     override fun get(): Flux<Xeet?> = repository.findAll()
+        .sort { o1, o2 -> o2!!.createDate.compareTo(o1!!.createDate)  }
 
     override fun save(xeet: Xeet): Mono<Xeet> = repository.save(xeet)
 }
